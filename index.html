@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>からだ、ごはん。 | 身近な食材でつくる健康レシピ</title>
+<meta name="description" content="身近な食材だけで作れる、体に良い料理を紹介するレシピアプリ。食べることで体にどんな影響があるかもわかります。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍃</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="logo">🍃 からだ、ごはん。</h1>
+      <p class="tagline">身近な食材でつくる、体にうれしいレシピ</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p>
+        スーパーで手に入る食材だけで作れる、体に良い料理を集めました。<br>
+        気になる健康効果からレシピを探して、食べるとどんな影響があるのかもチェックしてみましょう。
+      </p>
+    </section>
+
+    <section class="controls">
+      <div class="search-box">
+        <input type="search" id="searchInput" placeholder="食材名やレシピ名で検索（例：卵、鮭、豆腐）">
+      </div>
+      <div class="tag-filters" id="tagFilters">
+        <button class="tag-chip active" data-tag="all">すべて</button>
+      </div>
+    </section>
+
+    <section class="recipe-grid" id="recipeGrid"></section>
+
+    <p class="no-result" id="noResult" hidden>該当するレシピが見つかりませんでした。</p>
+  </main>
+
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>※ 掲載内容は一般的な栄養情報の紹介であり、医学的な効能を保証するものではありません。持病や体調に不安がある方は医師にご相談ください。</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
