@@ -11,7 +11,7 @@ const HEALTH_TAGS = {
   bone: { label: "骨・貧血対策", icon: "🦴" },
 };
 
-const RECIPES = [
+const CURATED_RECIPES = [
   {
     id: "tofu-wakame-soup",
     name: "豆腐とわかめの味噌汁",

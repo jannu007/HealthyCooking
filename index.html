@@ -9,33 +9,50 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="leaf-field" id="leafField" aria-hidden="true"></div>
+
   <header class="site-header">
+    <div class="header-glow" aria-hidden="true"></div>
     <div class="header-inner">
-      <h1 class="logo">🍃 からだ、ごはん。</h1>
+      <h1 class="logo"><span class="logo-leaf">🍃</span> からだ、ごはん。</h1>
       <p class="tagline">身近な食材でつくる、体にうれしいレシピ</p>
+      <p class="stats-line" id="statsLine"></p>
     </div>
+    <svg class="header-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,40 C240,100 480,0 720,40 C960,80 1200,20 1440,60 L1440,100 L0,100 Z" />
+    </svg>
   </header>
 
   <main>
-    <section class="intro">
+    <section class="intro reveal">
       <p>
-        スーパーで手に入る食材だけで作れる、体に良い料理を集めました。<br>
+        スーパーで手に入る食材の組み合わせから、体に良い料理を自動で集めました。<br>
         気になる健康効果からレシピを探して、食べるとどんな影響があるのかもチェックしてみましょう。
       </p>
     </section>
 
-    <section class="controls">
+    <section class="controls reveal">
       <div class="search-box">
+        <span class="search-icon" aria-hidden="true">🔍</span>
         <input type="search" id="searchInput" placeholder="食材名やレシピ名で検索（例：卵、鮭、豆腐）">
       </div>
       <div class="tag-filters" id="tagFilters">
-        <button class="tag-chip active" data-tag="all">すべて</button>
+        <button class="tag-chip active" data-tag="all">🌿 すべて</button>
       </div>
     </section>
+
+    <p class="result-info" id="resultInfo"></p>
 
     <section class="recipe-grid" id="recipeGrid"></section>
 
     <p class="no-result" id="noResult" hidden>該当するレシピが見つかりませんでした。</p>
+
+    <div class="load-more-wrap">
+      <button class="load-more-btn" id="loadMoreBtn" hidden>
+        <span>もっと見る</span>
+        <span class="leaf-spin" aria-hidden="true">🍃</span>
+      </button>
+    </div>
   </main>
 
   <div class="modal-overlay" id="modalOverlay" hidden>
@@ -50,6 +67,8 @@
   </footer>
 
   <script src="js/data.js"></script>
+  <script src="js/ingredients.js"></script>
+  <script src="js/dish-templates.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
