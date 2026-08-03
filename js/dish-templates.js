@@ -1,12 +1,20 @@
 // 調理法テンプレート: 食材データベースと組み合わせて大量のレシピを自動生成する
+// dishEmoji: 料理の種類（味噌汁・炒め物など）を表すアイコン
+// nameVariants: 同じ料理でも表情豊かになるよう、複数の言い回しを用意して食材ペアごとに割り当てる
 const DISH_TEMPLATES = [
   {
     id: "soup",
     time: "15分",
+    dishEmoji: "🍲",
     poolA: ["protein", "bean", "seaweed"],
     poolB: ["vegetable", "mushroom", "seaweed"],
     extraIngredients: ["だし汁 400ml", "味噌 大さじ2"],
-    nameFn: (a, b) => `${a.name}と${b.name}の味噌汁`,
+    nameVariants: [
+      (a, b) => `${a.name}と${b.name}のほっこり味噌汁`,
+      (a, b) => `${a.name}×${b.name}のじんわり味噌汁`,
+      (a, b) => `${a.name}と${b.name}のぽかぽか味噌汁`,
+      (a, b) => `元気チャージ！${a.name}と${b.name}の味噌汁`,
+    ],
     stepsFn: (a, b) => [
       "鍋にだし汁を入れて温める。",
       `${a.name}と${b.name}を食べやすい大きさに切る（乾物は水で戻しておく）。`,
@@ -17,10 +25,16 @@ const DISH_TEMPLATES = [
   {
     id: "stirfry",
     time: "15分",
+    dishEmoji: "🔥",
     poolA: ["protein", "bean"],
     poolB: ["vegetable", "mushroom", "carb"],
     extraIngredients: ["醤油 小さじ2", "ごま油 適量"],
-    nameFn: (a, b) => `${a.name}と${b.name}の炒め物`,
+    nameVariants: [
+      (a, b) => `${a.name}と${b.name}のガツンと炒め`,
+      (a, b) => `${a.name}×${b.name}の元気炒め`,
+      (a, b) => `${a.name}と${b.name}のスタミナ炒め`,
+      (a, b) => `パワフル！${a.name}と${b.name}の炒め物`,
+    ],
     stepsFn: (a, b) => [
       `${a.name}と${b.name}を一口大に切る。`,
       `フライパンにごま油を熱し、${a.name}を炒める。`,
@@ -31,10 +45,16 @@ const DISH_TEMPLATES = [
   {
     id: "salad",
     time: "10分",
+    dishEmoji: "🥗",
     poolA: ["vegetable", "bean"],
     poolB: ["vegetable", "bean"],
     extraIngredients: ["オリーブオイル・塩こしょう 適量"],
-    nameFn: (a, b) => `${a.name}と${b.name}のサラダ`,
+    nameVariants: [
+      (a, b) => `${a.name}と${b.name}のシャキシャキサラダ`,
+      (a, b) => `${a.name}×${b.name}のさっぱりサラダ`,
+      (a, b) => `${a.name}と${b.name}のフレッシュサラダ`,
+      (a, b) => `${a.name}と${b.name}のごきげんサラダ`,
+    ],
     stepsFn: (a, b) => [
       `${a.name}と${b.name}を食べやすい大きさに切る（加熱が必要なものは下茹でする）。`,
       "ボウルに入れ、オリーブオイルと塩こしょうで和える。",
@@ -44,10 +64,16 @@ const DISH_TEMPLATES = [
   {
     id: "simmered",
     time: "25分",
+    dishEmoji: "🥘",
     poolA: ["protein", "bean"],
     poolB: ["vegetable", "carb", "seaweed"],
     extraIngredients: ["だし汁 150ml", "醤油・みりん 各大さじ1"],
-    nameFn: (a, b) => `${a.name}と${b.name}の煮物`,
+    nameVariants: [
+      (a, b) => `${a.name}と${b.name}のほっこり煮`,
+      (a, b) => `${a.name}×${b.name}のじっくりコトコト煮`,
+      (a, b) => `${a.name}と${b.name}のやさしい煮物`,
+      (a, b) => `しみしみ！${a.name}と${b.name}の煮物`,
+    ],
     stepsFn: (a, b) => [
       `${a.name}と${b.name}を一口大に切る（乾物は戻しておく）。`,
       `鍋にだし汁、${a.name}、${b.name}を入れて煮立たせる。`,
@@ -57,10 +83,16 @@ const DISH_TEMPLATES = [
   {
     id: "smoothie",
     time: "5分",
+    dishEmoji: "🥤",
     poolA: ["fruit"],
     poolB: ["fruit", "dairy"],
     extraIngredients: [],
-    nameFn: (a, b) => `${a.name}と${b.name}のスムージー`,
+    nameVariants: [
+      (a, b) => `${a.name}と${b.name}のとろけるスムージー`,
+      (a, b) => `${a.name}×${b.name}のひんやりスムージー`,
+      (a, b) => `${a.name}と${b.name}の元気スムージー`,
+      (a, b) => `朝どり！${a.name}と${b.name}のスムージー`,
+    ],
     stepsFn: (a, b) => [
       `${a.name}と${b.name}を適当な大きさに切る。`,
       "ミキサーに入れ、なめらかになるまで撹拌する。",
@@ -70,10 +102,16 @@ const DISH_TEMPLATES = [
   {
     id: "aemono",
     time: "10分",
+    dishEmoji: "🍢",
     poolA: ["vegetable"],
     poolB: ["seaweed", "bean"],
     extraIngredients: ["ポン酢または白だし 適量"],
-    nameFn: (a, b) => `${a.name}と${b.name}の和え物`,
+    nameVariants: [
+      (a, b) => `${a.name}と${b.name}のさっぱり和え`,
+      (a, b) => `${a.name}×${b.name}のやみつき和え物`,
+      (a, b) => `${a.name}と${b.name}のほっと一息和え`,
+      (a, b) => `箸が止まらない！${a.name}と${b.name}の和え物`,
+    ],
     stepsFn: (a, b) => [
       `${a.name}は食べやすく切って軽く茹でる。`,
       `粗熱を取り、${b.name}と合わせる。`,
@@ -84,6 +122,15 @@ const DISH_TEMPLATES = [
 
 function uniq(arr) {
   return [...new Set(arr)];
+}
+
+// 食材ペアごとに毎回同じ言い回しになるよう、決定論的なハッシュでバリエーションを選ぶ
+function hashString(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return h;
 }
 
 function buildSummary(tags, a, b) {
@@ -106,10 +153,12 @@ function buildRecipeFromPair(template, a, b) {
     ...b.nutrients.map((n) => `${b.name}に含まれる${n.name}は、${n.effect}`),
   ].slice(0, 4);
 
+  const variantIndex = hashString(`${template.id}-${a.id}-${b.id}`) % template.nameVariants.length;
+
   return {
     id: `gen-${template.id}-${a.id}-${b.id}`,
-    name: template.nameFn(a, b),
-    emoji: a.emoji,
+    name: template.nameVariants[variantIndex](a, b),
+    emoji: template.dishEmoji,
     category: a.category,
     time: template.time,
     tags,

@@ -1,6 +1,6 @@
 (function () {
   const RECIPES = CURATED_RECIPES.concat(generateCombinatorialRecipes());
-  const PAGE_SIZE = 24;
+  const PAGE_SIZE = 96;
 
   const grid = document.getElementById("recipeGrid");
   const tagFilters = document.getElementById("tagFilters");
@@ -117,22 +117,16 @@
     card.setAttribute("role", "button");
     card.setAttribute("aria-label", `${recipe.name}の詳細を見る`);
 
-    const tagIcons = recipe.tags
-      .slice(0, 2)
-      .map((t) => `<span class="tile-tag" title="${HEALTH_TAGS[t].label}">${HEALTH_TAGS[t].icon}</span>`)
-      .join("");
+    const topTag = recipe.tags[0];
 
     card.innerHTML = `
       <div class="tile-art">
         <span class="tile-blob" aria-hidden="true"></span>
         <span class="tile-emoji">${recipe.emoji}</span>
+        ${topTag ? `<span class="tile-badge" title="${HEALTH_TAGS[topTag].label}">${HEALTH_TAGS[topTag].icon}</span>` : ""}
       </div>
       <div class="tile-body">
-        <h3>${recipe.name}</h3>
-        <div class="tile-meta">
-          <span>⏱ ${recipe.time}</span>
-          <span class="tile-tags">${tagIcons}</span>
-        </div>
+        <h3 title="${recipe.name}">${recipe.name}</h3>
       </div>
     `;
 

@@ -14,7 +14,7 @@ const HEALTH_TAGS = {
 const CURATED_RECIPES = [
   {
     id: "tofu-wakame-soup",
-    name: "豆腐とわかめの味噌汁",
+    name: "豆腐とわかめのほっこり味噌汁",
     emoji: "🍲",
     category: "protein",
     time: "10分",
@@ -39,8 +39,8 @@ const CURATED_RECIPES = [
   },
   {
     id: "chicken-veggie-steam",
-    name: "鶏むね肉と野菜の蒸し料理",
-    emoji: "🍗",
+    name: "疲れ知らず！鶏むね肉と野菜の蒸し料理",
+    emoji: "♨️",
     category: "protein",
     time: "20分",
     tags: ["fatigue", "diet"],
@@ -64,7 +64,7 @@ const CURATED_RECIPES = [
   },
   {
     id: "natto-kimchi-don",
-    name: "納豆キムチ丼",
+    name: "スタミナ納豆キムチ丼",
     emoji: "🍚",
     category: "protein",
     time: "5分",
@@ -88,7 +88,7 @@ const CURATED_RECIPES = [
   },
   {
     id: "salmon-spinach-foil",
-    name: "鮭とほうれん草のホイル焼き",
+    name: "鮭とほうれん草のうるツヤホイル焼き",
     emoji: "🐟",
     category: "protein",
     time: "20分",
@@ -113,8 +113,8 @@ const CURATED_RECIPES = [
   },
   {
     id: "mushroom-egg-stirfry",
-    name: "きのこと卵の炒め物",
-    emoji: "🍄",
+    name: "きのこと卵のやみつき炒め",
+    emoji: "🔥",
     category: "mushroom",
     time: "10分",
     tags: ["gut", "sugar"],
@@ -138,8 +138,8 @@ const CURATED_RECIPES = [
   },
   {
     id: "banana-yogurt-honey",
-    name: "バナナとヨーグルトのはちみつがけ",
-    emoji: "🍌",
+    name: "バナナとヨーグルトの朝どりはちみつがけ",
+    emoji: "🥣",
     category: "fruit",
     time: "3分",
     tags: ["gut", "fatigue"],
@@ -162,8 +162,8 @@ const CURATED_RECIPES = [
   },
   {
     id: "hijiki-soybean-simmer",
-    name: "ひじきと大豆の煮物",
-    emoji: "🫘",
+    name: "ひじきと大豆のほっこり煮",
+    emoji: "🥘",
     category: "seaweed",
     time: "20分",
     tags: ["bone", "gut"],
@@ -187,8 +187,8 @@ const CURATED_RECIPES = [
   },
   {
     id: "cabbage-egg-consomme",
-    name: "キャベツと卵のコンソメスープ",
-    emoji: "🥬",
+    name: "キャベツと卵のやさしいコンソメスープ",
+    emoji: "🍲",
     category: "vegetable",
     time: "10分",
     tags: ["diet", "gut"],
@@ -212,8 +212,8 @@ const CURATED_RECIPES = [
   },
   {
     id: "sweetpotato-chicken-stirfry",
-    name: "さつまいもと鶏肉の甘辛炒め",
-    emoji: "🍠",
+    name: "さつまいもと鶏肉のごちそう甘辛炒め",
+    emoji: "🔥",
     category: "carb",
     time: "20分",
     tags: ["gut", "skin"],
@@ -238,7 +238,7 @@ const CURATED_RECIPES = [
   {
     id: "tomato-egg-stirfry",
     name: "トマトと卵の中華炒め",
-    emoji: "🍅",
+    emoji: "🔥",
     category: "vegetable",
     time: "10分",
     tags: ["skin", "immune"],
@@ -263,7 +263,7 @@ const CURATED_RECIPES = [
   {
     id: "pork-beansprout-stirfry",
     name: "もやしと豚肉のスタミナ炒め",
-    emoji: "🥩",
+    emoji: "🔥",
     category: "protein",
     time: "10分",
     tags: ["fatigue"],
@@ -287,8 +287,8 @@ const CURATED_RECIPES = [
   },
   {
     id: "carrot-tuna-salad",
-    name: "にんじんとツナのサラダ",
-    emoji: "🥕",
+    name: "にんじんとツナのしゃっきりサラダ",
+    emoji: "🥗",
     category: "vegetable",
     time: "10分",
     tags: ["eye", "skin"],

@@ -289,14 +289,14 @@ main {
 /* ---------- Tile grid ---------- */
 .tile-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(82px, 1fr));
+  gap: 0.55rem;
 }
 
 .tile {
   position: relative;
   background: var(--color-surface);
-  border-radius: var(--radius);
+  border-radius: 12px;
   border: 1px solid var(--color-border);
   cursor: pointer;
   box-shadow: var(--shadow-card);
@@ -336,8 +336,8 @@ main {
 
 .tile-emoji {
   position: relative;
-  font-size: 2.6rem;
-  filter: drop-shadow(0 6px 10px rgba(18, 51, 38, 0.18));
+  font-size: 1.35rem;
+  filter: drop-shadow(0 3px 5px rgba(18, 51, 38, 0.18));
   transition: transform 0.35s var(--ease);
 }
 
@@ -345,33 +345,37 @@ main {
   transform: scale(1.15) rotate(-6deg);
 }
 
-.tile-body {
-  padding: 0.85rem 0.9rem 1rem;
+.tile-badge {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  width: 1.35rem;
+  height: 1.35rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(18, 51, 38, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.tile-body {
+  padding: 0.4rem 0.4rem 0.5rem;
+  display: flex;
   flex: 1;
 }
 
 .tile-body h3 {
   margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.4;
-}
-
-.tile-meta {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-}
-
-.tile-tags {
-  display: flex;
-  gap: 0.25rem;
-  font-size: 0.9rem;
+  font-size: 0.66rem;
+  line-height: 1.35;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* category-themed blob gradients */
