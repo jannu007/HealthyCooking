@@ -5,22 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>からだ、ごはん。 | 身近な食材でつくる健康レシピ</title>
 <meta name="description" content="身近な食材だけで作れる、体に良い料理を紹介するレシピアプリ。食べることで体にどんな影響があるかもわかります。">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍃</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍳</text></svg>">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="leaf-field" id="leafField" aria-hidden="true"></div>
-
   <header class="site-header">
-    <div class="header-glow" aria-hidden="true"></div>
-    <div class="header-inner">
-      <h1 class="logo"><span class="logo-leaf">🍃</span> からだ、ごはん。</h1>
-      <p class="tagline">身近な食材でつくる、体にうれしいレシピ</p>
+    <div class="header-top">
+      <h1 class="logo">🍳 からだ、ごはん。</h1>
       <p class="stats-line" id="statsLine"></p>
     </div>
-    <svg class="header-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,40 C240,100 480,0 720,40 C960,80 1200,20 1440,60 L1440,100 L0,100 Z" />
-    </svg>
+    <p class="tagline">身近な食材でつくる、体にうれしいレシピ</p>
+    <div class="header-search">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input type="search" id="searchInput" placeholder="食材名やレシピ名で検索（例：卵、鮭、豆腐）">
+    </div>
   </header>
 
   <main>
@@ -33,12 +31,8 @@
 
     <div class="controls-sticky" id="controlsSticky">
       <section class="controls">
-        <div class="search-box">
-          <span class="search-icon" aria-hidden="true">🔍</span>
-          <input type="search" id="searchInput" placeholder="食材名やレシピ名で検索（例：卵、鮭、豆腐）">
-        </div>
         <div class="tag-filters" id="tagFilters">
-          <button class="tag-chip active" data-tag="all">🌿 すべて</button>
+          <button class="tag-chip active" data-tag="all">すべて</button>
         </div>
       </section>
     </div>
@@ -52,7 +46,7 @@
     <nav class="pagination" id="pagination" aria-label="ページ送り"></nav>
   </main>
 
-  <button class="back-to-top" id="backToTop" aria-label="ページ上部へ戻る" hidden>🍃<span>TOP</span></button>
+  <button class="back-to-top" id="backToTop" aria-label="ページ上部へ戻る" hidden>↑<span>TOP</span></button>
 
   <div class="modal-overlay" id="modalOverlay" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">

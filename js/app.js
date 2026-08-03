@@ -62,26 +62,6 @@
     }
   });
 
-  // --- floating leaves decoration ---
-  function spawnLeaves() {
-    if (prefersReducedMotion) return;
-    const field = document.getElementById("leafField");
-    const leafEmojis = ["🍃", "🌿", "🍀"];
-    const count = window.innerWidth < 600 ? 7 : 14;
-    for (let i = 0; i < count; i++) {
-      const leaf = document.createElement("span");
-      leaf.className = "leaf";
-      leaf.textContent = leafEmojis[i % leafEmojis.length];
-      leaf.style.left = `${Math.random() * 100}%`;
-      leaf.style.animationDuration = `${14 + Math.random() * 12}s`;
-      leaf.style.animationDelay = `${Math.random() * -20}s`;
-      leaf.style.fontSize = `${0.8 + Math.random() * 1.2}rem`;
-      leaf.style.setProperty("--drift", `${(Math.random() * 2 - 1) * 80}px`);
-      field.appendChild(leaf);
-    }
-  }
-  spawnLeaves();
-
   // --- back to top ---
   window.addEventListener("scroll", () => {
     backToTop.hidden = window.scrollY < 600;
@@ -121,12 +101,12 @@
 
     card.innerHTML = `
       <div class="tile-art">
-        <span class="tile-blob" aria-hidden="true"></span>
         <span class="tile-emoji">${recipe.emoji}</span>
         ${topTag ? `<span class="tile-badge" title="${HEALTH_TAGS[topTag].label}">${HEALTH_TAGS[topTag].icon}</span>` : ""}
       </div>
       <div class="tile-body">
         <h3 title="${recipe.name}">${recipe.name}</h3>
+        <div class="tile-time">⏱ ${recipe.time}</div>
       </div>
     `;
 
