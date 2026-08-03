@@ -31,29 +31,28 @@
       </p>
     </section>
 
-    <section class="controls reveal">
-      <div class="search-box">
-        <span class="search-icon" aria-hidden="true">🔍</span>
-        <input type="search" id="searchInput" placeholder="食材名やレシピ名で検索（例：卵、鮭、豆腐）">
-      </div>
-      <div class="tag-filters" id="tagFilters">
-        <button class="tag-chip active" data-tag="all">🌿 すべて</button>
-      </div>
-    </section>
+    <div class="controls-sticky" id="controlsSticky">
+      <section class="controls">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input type="search" id="searchInput" placeholder="食材名やレシピ名で検索（例：卵、鮭、豆腐）">
+        </div>
+        <div class="tag-filters" id="tagFilters">
+          <button class="tag-chip active" data-tag="all">🌿 すべて</button>
+        </div>
+      </section>
+    </div>
 
     <p class="result-info" id="resultInfo"></p>
 
-    <section class="recipe-grid" id="recipeGrid"></section>
+    <section class="tile-grid" id="recipeGrid"></section>
 
     <p class="no-result" id="noResult" hidden>該当するレシピが見つかりませんでした。</p>
 
-    <div class="load-more-wrap">
-      <button class="load-more-btn" id="loadMoreBtn" hidden>
-        <span>もっと見る</span>
-        <span class="leaf-spin" aria-hidden="true">🍃</span>
-      </button>
-    </div>
+    <nav class="pagination" id="pagination" aria-label="ページ送り"></nav>
   </main>
+
+  <button class="back-to-top" id="backToTop" aria-label="ページ上部へ戻る" hidden>🍃<span>TOP</span></button>
 
   <div class="modal-overlay" id="modalOverlay" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">

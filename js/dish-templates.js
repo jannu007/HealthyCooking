@@ -110,6 +110,7 @@ function buildRecipeFromPair(template, a, b) {
     id: `gen-${template.id}-${a.id}-${b.id}`,
     name: template.nameFn(a, b),
     emoji: a.emoji,
+    category: a.category,
     time: template.time,
     tags,
     ingredients: [`${a.name} ${a.qty}`, `${b.name} ${b.qty}`, ...template.extraIngredients],

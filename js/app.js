@@ -1,21 +1,24 @@
 (function () {
   const RECIPES = CURATED_RECIPES.concat(generateCombinatorialRecipes());
-  const PAGE_SIZE = 30;
+  const PAGE_SIZE = 24;
 
   const grid = document.getElementById("recipeGrid");
   const tagFilters = document.getElementById("tagFilters");
   const searchInput = document.getElementById("searchInput");
   const noResult = document.getElementById("noResult");
   const resultInfo = document.getElementById("resultInfo");
-  const loadMoreBtn = document.getElementById("loadMoreBtn");
+  const pagination = document.getElementById("pagination");
   const statsLine = document.getElementById("statsLine");
   const modalOverlay = document.getElementById("modalOverlay");
   const modalContent = document.getElementById("modalContent");
   const modalClose = document.getElementById("modalClose");
+  const backToTop = document.getElementById("backToTop");
+  const controlsSticky = document.getElementById("controlsSticky");
 
   let activeTag = "all";
   let searchTerm = "";
   let filteredCache = [];
+  let currentPage = 1;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -79,6 +82,14 @@
   }
   spawnLeaves();
 
+  // --- back to top ---
+  window.addEventListener("scroll", () => {
+    backToTop.hidden = window.scrollY < 600;
+  }, { passive: true });
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  });
+
   // --- tag filter chips ---
   function buildTagFilters() {
     Object.entries(HEALTH_TAGS).forEach(([key, tag]) => {
@@ -99,23 +110,30 @@
     return haystack.includes(searchTerm.toLowerCase());
   }
 
-  function buildCard(recipe) {
+  function buildTile(recipe) {
     const card = document.createElement("article");
-    card.className = "recipe-card reveal";
+    card.className = `tile tile-cat-${recipe.category || "vegetable"} reveal`;
     card.tabIndex = 0;
     card.setAttribute("role", "button");
     card.setAttribute("aria-label", `${recipe.name}の詳細を見る`);
 
-    const tagBadges = recipe.tags
-      .map((t) => `<span class="badge">${HEALTH_TAGS[t].icon} ${HEALTH_TAGS[t].label}</span>`)
+    const tagIcons = recipe.tags
+      .slice(0, 2)
+      .map((t) => `<span class="tile-tag" title="${HEALTH_TAGS[t].label}">${HEALTH_TAGS[t].icon}</span>`)
       .join("");
 
     card.innerHTML = `
-      <div class="card-shine" aria-hidden="true"></div>
-      <div class="emoji">${recipe.emoji}</div>
-      <h3>${recipe.name}</h3>
-      <div class="meta">調理時間 ${recipe.time} ・ ${recipe.ingredients.length}つの食材</div>
-      <div class="card-tags">${tagBadges}</div>
+      <div class="tile-art">
+        <span class="tile-blob" aria-hidden="true"></span>
+        <span class="tile-emoji">${recipe.emoji}</span>
+      </div>
+      <div class="tile-body">
+        <h3>${recipe.name}</h3>
+        <div class="tile-meta">
+          <span>⏱ ${recipe.time}</span>
+          <span class="tile-tags">${tagIcons}</span>
+        </div>
+      </div>
     `;
 
     card.addEventListener("click", () => openModal(recipe));
@@ -129,31 +147,86 @@
     return card;
   }
 
-  function updateResultInfo() {
-    const shown = grid.children.length;
-    const total = filteredCache.length;
-    resultInfo.textContent = total
-      ? `${total.toLocaleString()}品中 ${shown.toLocaleString()}品を表示中`
-      : "";
-    loadMoreBtn.hidden = shown >= total;
+  function totalPages() {
+    return Math.max(1, Math.ceil(filteredCache.length / PAGE_SIZE));
   }
 
-  function renderMore() {
-    const start = grid.children.length;
-    const slice = filteredCache.slice(start, start + PAGE_SIZE);
-    slice.forEach((recipe) => {
-      const card = buildCard(recipe);
-      grid.appendChild(card);
-      observeReveal(card);
+  function pageNumberList(current, total) {
+    const pages = new Set([1, total, current, current - 1, current + 1]);
+    const sorted = [...pages].filter((p) => p >= 1 && p <= total).sort((a, b) => a - b);
+    const out = [];
+    let prev = 0;
+    sorted.forEach((p) => {
+      if (prev && p - prev > 1) out.push("…");
+      out.push(p);
+      prev = p;
     });
-    updateResultInfo();
+    return out;
+  }
+
+  function renderPagination() {
+    const total = totalPages();
+    pagination.innerHTML = "";
+    if (total <= 1) return;
+
+    const makeBtn = (label, page, opts = {}) => {
+      const btn = document.createElement("button");
+      btn.className = "page-btn" + (opts.active ? " active" : "");
+      btn.textContent = label;
+      btn.disabled = !!opts.disabled;
+      if (!opts.disabled && !opts.ellipsis) {
+        btn.addEventListener("click", () => goToPage(page));
+      }
+      if (opts.ellipsis) {
+        btn.className += " ellipsis";
+        btn.disabled = true;
+      }
+      return btn;
+    };
+
+    pagination.appendChild(makeBtn("‹ 前へ", currentPage - 1, { disabled: currentPage === 1 }));
+    pageNumberList(currentPage, total).forEach((p) => {
+      if (p === "…") {
+        pagination.appendChild(makeBtn("…", null, { ellipsis: true }));
+      } else {
+        pagination.appendChild(makeBtn(String(p), p, { active: p === currentPage }));
+      }
+    });
+    pagination.appendChild(makeBtn("次へ ›", currentPage + 1, { disabled: currentPage === total }));
+  }
+
+  function renderPage() {
+    const total = totalPages();
+    currentPage = Math.min(Math.max(1, currentPage), total);
+
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const slice = filteredCache.slice(start, start + PAGE_SIZE);
+
+    grid.innerHTML = "";
+    slice.forEach((recipe) => {
+      const tile = buildTile(recipe);
+      grid.appendChild(tile);
+      observeReveal(tile);
+    });
+
+    noResult.hidden = filteredCache.length !== 0;
+    resultInfo.textContent = filteredCache.length
+      ? `${filteredCache.length.toLocaleString()}品中 ${(start + 1).toLocaleString()}〜${Math.min(start + PAGE_SIZE, filteredCache.length).toLocaleString()}品目を表示`
+      : "";
+    renderPagination();
+  }
+
+  function goToPage(page) {
+    currentPage = page;
+    renderPage();
+    const top = controlsSticky.getBoundingClientRect().bottom + window.scrollY - 12;
+    window.scrollTo({ top, behavior: prefersReducedMotion ? "auto" : "smooth" });
   }
 
   function applyFiltersAndReset() {
     filteredCache = RECIPES.filter(matchesFilters);
-    grid.innerHTML = "";
-    noResult.hidden = filteredCache.length !== 0;
-    renderMore();
+    currentPage = 1;
+    renderPage();
   }
 
   function openModal(recipe) {
@@ -231,7 +304,6 @@
     }, 120);
   });
 
-  loadMoreBtn.addEventListener("click", renderMore);
   modalClose.addEventListener("click", closeModal);
   modalOverlay.addEventListener("click", (e) => {
     if (e.target === modalOverlay) closeModal();
