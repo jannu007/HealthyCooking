@@ -9,6 +9,7 @@ const DISH_TEMPLATES = [
     poolA: ["protein", "bean", "seaweed"],
     poolB: ["vegetable", "mushroom", "seaweed"],
     extraIngredients: ["だし汁 400ml", "味噌 大さじ2"],
+    extraKcal: 80,
     nameVariants: [
       (a, b) => `${a.name}と${b.name}のほっこり味噌汁`,
       (a, b) => `${a.name}×${b.name}のじんわり味噌汁`,
@@ -29,6 +30,7 @@ const DISH_TEMPLATES = [
     poolA: ["protein", "bean"],
     poolB: ["vegetable", "mushroom", "carb"],
     extraIngredients: ["醤油 小さじ2", "ごま油 適量"],
+    extraKcal: 110,
     nameVariants: [
       (a, b) => `${a.name}と${b.name}のガツンと炒め`,
       (a, b) => `${a.name}×${b.name}の元気炒め`,
@@ -49,6 +51,7 @@ const DISH_TEMPLATES = [
     poolA: ["vegetable", "bean"],
     poolB: ["vegetable", "bean"],
     extraIngredients: ["オリーブオイル・塩こしょう 適量"],
+    extraKcal: 120,
     nameVariants: [
       (a, b) => `${a.name}と${b.name}のシャキシャキサラダ`,
       (a, b) => `${a.name}×${b.name}のさっぱりサラダ`,
@@ -68,6 +71,7 @@ const DISH_TEMPLATES = [
     poolA: ["protein", "bean"],
     poolB: ["vegetable", "carb", "seaweed"],
     extraIngredients: ["だし汁 150ml", "醤油・みりん 各大さじ1"],
+    extraKcal: 50,
     nameVariants: [
       (a, b) => `${a.name}と${b.name}のほっこり煮`,
       (a, b) => `${a.name}×${b.name}のじっくりコトコト煮`,
@@ -87,6 +91,7 @@ const DISH_TEMPLATES = [
     poolA: ["fruit"],
     poolB: ["fruit", "dairy"],
     extraIngredients: [],
+    extraKcal: 0,
     nameVariants: [
       (a, b) => `${a.name}と${b.name}のとろけるスムージー`,
       (a, b) => `${a.name}×${b.name}のひんやりスムージー`,
@@ -106,6 +111,7 @@ const DISH_TEMPLATES = [
     poolA: ["vegetable"],
     poolB: ["seaweed", "bean"],
     extraIngredients: ["ポン酢または白だし 適量"],
+    extraKcal: 10,
     nameVariants: [
       (a, b) => `${a.name}と${b.name}のさっぱり和え`,
       (a, b) => `${a.name}×${b.name}のやみつき和え物`,
@@ -154,6 +160,7 @@ function buildRecipeFromPair(template, a, b) {
   ].slice(0, 4);
 
   const variantIndex = hashString(`${template.id}-${a.id}-${b.id}`) % template.nameVariants.length;
+  const calories = a.kcal + b.kcal + template.extraKcal;
 
   return {
     id: `gen-${template.id}-${a.id}-${b.id}`,
@@ -161,6 +168,7 @@ function buildRecipeFromPair(template, a, b) {
     emoji: template.dishEmoji,
     category: a.category,
     time: template.time,
+    calories,
     tags,
     ingredients: [`${a.name} ${a.qty}`, `${b.name} ${b.qty}`, ...template.extraIngredients],
     steps: template.stepsFn(a, b),

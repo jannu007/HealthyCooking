@@ -18,6 +18,7 @@ const CURATED_RECIPES = [
     emoji: "🍲",
     category: "protein",
     time: "10分",
+    calories: 195,
     tags: ["gut", "bone"],
     ingredients: ["絹ごし豆腐 1/2丁", "乾燥わかめ 大さじ1", "長ねぎ 1/4本", "だし汁 400ml", "味噌 大さじ2"],
     steps: [
@@ -43,6 +44,7 @@ const CURATED_RECIPES = [
     emoji: "♨️",
     category: "protein",
     time: "20分",
+    calories: 350,
     tags: ["fatigue", "diet"],
     ingredients: ["鶏むね肉 1枚", "キャベツ 2枚", "にんじん 1/2本", "もやし 1袋", "酒・塩 少々"],
     steps: [
@@ -68,6 +70,7 @@ const CURATED_RECIPES = [
     emoji: "🍚",
     category: "protein",
     time: "5分",
+    calories: 420,
     tags: ["gut", "immune"],
     ingredients: ["納豆 1パック", "キムチ 適量", "ごはん 1膳", "卵黄 1個", "刻みのり 少々"],
     steps: [
@@ -92,6 +95,7 @@ const CURATED_RECIPES = [
     emoji: "🐟",
     category: "protein",
     time: "20分",
+    calories: 195,
     tags: ["skin", "eye"],
     ingredients: ["生鮭 1切れ", "ほうれん草 1/2束", "しめじ 1/4株", "バター 5g", "塩こしょう 少々"],
     steps: [
@@ -117,6 +121,7 @@ const CURATED_RECIPES = [
     emoji: "🔥",
     category: "mushroom",
     time: "10分",
+    calories: 275,
     tags: ["gut", "sugar"],
     ingredients: ["しめじ 1株", "えのき 1/2袋", "卵 2個", "醤油 小さじ1", "ごま油 適量"],
     steps: [
@@ -142,6 +147,7 @@ const CURATED_RECIPES = [
     emoji: "🥣",
     category: "fruit",
     time: "3分",
+    calories: 220,
     tags: ["gut", "fatigue"],
     ingredients: ["バナナ 1本", "プレーンヨーグルト 100g", "はちみつ 小さじ1", "お好みでナッツ"],
     steps: [
@@ -166,6 +172,7 @@ const CURATED_RECIPES = [
     emoji: "🥘",
     category: "seaweed",
     time: "20分",
+    calories: 165,
     tags: ["bone", "gut"],
     ingredients: ["乾燥ひじき 10g", "蒸し大豆 50g", "にんじん 1/3本", "だし汁 150ml", "醤油・みりん 各大さじ1"],
     steps: [
@@ -191,6 +198,7 @@ const CURATED_RECIPES = [
     emoji: "🍲",
     category: "vegetable",
     time: "10分",
+    calories: 100,
     tags: ["diet", "gut"],
     ingredients: ["キャベツ 2枚", "卵 1個", "コンソメ 1個", "水 400ml", "こしょう 少々"],
     steps: [
@@ -216,6 +224,7 @@ const CURATED_RECIPES = [
     emoji: "🔥",
     category: "carb",
     time: "20分",
+    calories: 380,
     tags: ["gut", "skin"],
     ingredients: ["さつまいも 1/2本", "鶏もも肉 1/2枚", "醤油・みりん・砂糖 各大さじ1", "ごま 少々"],
     steps: [
@@ -241,6 +250,7 @@ const CURATED_RECIPES = [
     emoji: "🔥",
     category: "vegetable",
     time: "10分",
+    calories: 300,
     tags: ["skin", "immune"],
     ingredients: ["トマト 2個", "卵 2個", "塩・砂糖 少々", "ごま油 適量"],
     steps: [
@@ -266,6 +276,7 @@ const CURATED_RECIPES = [
     emoji: "🔥",
     category: "protein",
     time: "10分",
+    calories: 385,
     tags: ["fatigue"],
     ingredients: ["豚こま肉 150g", "もやし 1袋", "にら 1/2束", "醤油・にんにく 各少々"],
     steps: [
@@ -291,6 +302,7 @@ const CURATED_RECIPES = [
     emoji: "🥗",
     category: "vegetable",
     time: "10分",
+    calories: 250,
     tags: ["eye", "skin"],
     ingredients: ["にんじん 1本", "ツナ缶 1缶", "マヨネーズ 大さじ1", "塩こしょう 少々"],
     steps: [

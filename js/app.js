@@ -106,7 +106,7 @@
       </div>
       <div class="tile-body">
         <h3 title="${recipe.name}">${recipe.name}</h3>
-        <div class="tile-time">⏱ ${recipe.time}</div>
+        <div class="tile-time">⏱ ${recipe.time} ・ 🔥${recipe.calories}kcal</div>
       </div>
     `;
 
@@ -214,7 +214,7 @@
 
     modalContent.innerHTML = `
       <h2 id="modalTitle"><span>${recipe.emoji}</span>${recipe.name}</h2>
-      <div class="meta">調理時間 ${recipe.time}</div>
+      <div class="meta">調理時間 ${recipe.time} ・ 約${recipe.calories}kcal（1人分目安）</div>
       <div class="card-tags">${tagBadges}</div>
 
       <section>
